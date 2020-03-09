@@ -43,7 +43,7 @@ public class AnimalListAdapter extends RecyclerView.Adapter<AnimalListAdapter.An
         TextView animalName = holder.itemView.findViewById(R.id.animalName);
 
         animalName.setText(animalList.get(position).name);
-        Util.loadImage(animalImage, animalList.get(position).imageUrl, new CircularProgressDrawable(animalImage.getContext()));
+        Util.loadImage(animalImage, animalList.get(position).imageUrl, Util.getProgressDrawable(animalImage.getContext()));
     }
 
     @Override
