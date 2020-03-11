@@ -1,6 +1,5 @@
 package com.umld.animals.view;
 
-import android.net.Uri;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -8,8 +7,11 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.constraintlayout.widget.ConstraintLayout;
+
+import androidx.navigation.NavDirections;
+import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.RecyclerView;
-import androidx.swiperefreshlayout.widget.CircularProgressDrawable;
 
 import com.umld.animals.R;
 import com.umld.animals.model.AnimalModel;
@@ -41,9 +43,15 @@ public class AnimalListAdapter extends RecyclerView.Adapter<AnimalListAdapter.An
     public void onBindViewHolder(@NonNull AnimalViewHolder holder, int position) {
         ImageView animalImage = holder.itemView.findViewById(R.id.animalImage);
         TextView animalName = holder.itemView.findViewById(R.id.animalName);
+        ConstraintLayout animalLayout = holder.itemView.findViewById(R.id.animalLayout);
 
         animalName.setText(animalList.get(position).name);
         Util.loadImage(animalImage, animalList.get(position).imageUrl, Util.getProgressDrawable(animalImage.getContext()));
+
+        animalLayout.setOnClickListener(view -> {
+            NavDirections action = ListFragmentDirections.actionGoToDetails(animalList.get(position));
+            Navigation.findNavController(view).navigate(action);
+        });
     }
 
     @Override

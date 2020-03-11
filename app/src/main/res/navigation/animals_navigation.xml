@@ -27,8 +27,7 @@
             app:enterAnim="@anim/nav_default_enter_anim"
             app:exitAnim="@anim/nav_default_exit_anim" />
         <argument
-            android:name="animalId"
-            app:argType="integer"
-            android:defaultValue="0" />
+            android:name="animalModel"
+            app:argType="com.umld.animals.model.AnimalModel" />
     </fragment>
 </navigation>
