@@ -10,11 +10,13 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.NavDirections;
 import androidx.navigation.Navigation;
+import androidx.palette.graphics.Palette;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
@@ -23,6 +25,7 @@ import com.bumptech.glide.request.transition.Transition;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.umld.animals.R;
 import com.umld.animals.model.AnimalModel;
+
 import com.umld.animals.util.Util;
 
 import butterknife.BindView;
@@ -47,6 +50,15 @@ public class DetailFragment extends Fragment {
 
     @BindView(R.id.animalDiet)
     TextView animalDiet;
+
+    @BindView(R.id.animalLinearLayout)
+    LinearLayout animalLayout;
+
+    @BindView(R.id.animalSpeed)
+    TextView animalSpeed;
+
+    @BindView(R.id.animalTaxonomy)
+    TextView animalTaxonomy;
 
 
     public DetailFragment() {
@@ -75,8 +87,10 @@ public class DetailFragment extends Fragment {
             animalLocation.setText(animal.location);
             animalLifespan.setText(animal.lifeSpan);
             animalDiet.setText(animal.diet);
+//            animalSpeed.setText(animal.speed);
 
             Util.loadImage(animalImage, animal.imageUrl, Util.getProgressDrawable(animalImage.getContext()));
+            setupBackgroundColor(animal.imageUrl);
         }
     }
 
@@ -87,13 +101,20 @@ public class DetailFragment extends Fragment {
                 .into(new CustomTarget<Bitmap>() {
                     @Override
                     public void onResourceReady(@NonNull Bitmap resource, @Nullable Transition<? super Bitmap> transition) {
-
+                        Palette.from(resource)
+                                .generate(palette -> {
+                                    Palette.Swatch color = palette.getLightMutedSwatch();
+                                    if (color != null) {
+                                        int intColor = color.getRgb();
+                                        animalLayout.setBackgroundColor(intColor);
+                                    }
+                                });
                     }
 
                     @Override
                     public void onLoadCleared(@Nullable Drawable placeholder) {
 
                     }
-                })
+                });
     }
 }
