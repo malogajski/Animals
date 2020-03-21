@@ -5,7 +5,7 @@ import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
 
 public class SharedPreferecesHelper {
-    private static final String PREF_API_KEY = "";
+    private static final String PREF_API_KEY = "Api key";
 
     private SharedPreferences prefs;
 

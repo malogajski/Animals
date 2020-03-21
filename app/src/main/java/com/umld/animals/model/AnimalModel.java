@@ -63,11 +63,11 @@ public class AnimalModel implements Parcelable {
 }
 
 class Taxonomy implements Parcelable {
-    String kindom;
-    String order;
-    String family;
+    public String kindom;
+    public String order;
+    public String family;
 
-    protected Taxonomy(Parcel in) {
+    public Taxonomy(Parcel in) {
         kindom = in.readString();
         order = in.readString();
         family = in.readString();
@@ -99,10 +99,10 @@ class Taxonomy implements Parcelable {
 }
 
 class Speed implements Parcelable {
-    String metric;
-    String imperial;
+    public String metric;
+    public String imperial;
 
-    protected Speed(Parcel in) {
+    public Speed(Parcel in) {
         metric = in.readString();
         imperial = in.readString();
     }
